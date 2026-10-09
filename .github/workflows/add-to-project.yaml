@@ -53,7 +53,7 @@ permissions: {}
 
 jobs:
   add:
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.RUNNER_LABEL || 'ubuntu-latest' }}
     steps:
       - name: Mint a github app installation token
         id: app

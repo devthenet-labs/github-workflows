@@ -28,7 +28,7 @@ permissions: {} # granted on the job
 
 jobs:
   notice:
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.RUNNER_LABEL || 'ubuntu-latest' }}
     permissions:
       # post the informational comment on the PR
       pull-requests: write

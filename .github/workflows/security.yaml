@@ -58,7 +58,7 @@ jobs:
   # checkout (a job-level `if:` could not see the workspace), so the JSON is
   # assembled in this step. `actions` is always scanned when detecting.
   prep:
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.RUNNER_LABEL || 'ubuntu-latest' }}
     permissions:
       # check out the repository
       contents: read
@@ -113,7 +113,7 @@ jobs:
   analyze:
     needs: prep
     name: Analyze (${{ matrix.language }})
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.RUNNER_LABEL || 'ubuntu-latest' }}
     permissions:
       # upload analysis results to code scanning
       security-events: write

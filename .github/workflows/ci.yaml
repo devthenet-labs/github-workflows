@@ -70,7 +70,7 @@ jobs:
       fail-fast: false
       matrix:
         target: [lint, build, test]
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.RUNNER_LABEL || 'ubuntu-latest' }}
     permissions:
       # check out the repository
       contents: read
@@ -197,7 +197,7 @@ jobs:
   coverage:
     needs: tasks
     if: ${{ !cancelled() && needs.tasks.result == 'success' && inputs.coverage }}
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.RUNNER_LABEL || 'ubuntu-latest' }}
     permissions:
       # check out the repository
       contents: read
@@ -242,7 +242,7 @@ jobs:
   # commonly needs services or secrets and shouldn't run on every PR by default.
   e2e:
     if: ${{ inputs.e2e }}
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.RUNNER_LABEL || 'ubuntu-latest' }}
     permissions:
       # check out the repository
       contents: read

@@ -164,7 +164,7 @@ concurrency:
 
 jobs:
   release-please:
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.RUNNER_LABEL || 'ubuntu-latest' }}
     permissions:
       # create draft release and git tag
       contents: write
@@ -272,7 +272,7 @@ jobs:
     if: >-
       needs.release-please.outputs.release_created && needs.release-please.outputs.goreleaser &&
       contains(fromJSON('["push","workflow_dispatch","schedule"]'), github.event_name)
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.RUNNER_LABEL || 'ubuntu-latest' }}
     permissions:
       # upload assets and publish the draft release (and move vanity tags)
       contents: write
@@ -426,7 +426,7 @@ jobs:
     if: >-
       needs.release-please.outputs.release_created && needs.release-please.outputs.zensical &&
       contains(fromJSON('["push","workflow_dispatch","schedule"]'), github.event_name)
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.RUNNER_LABEL || 'ubuntu-latest' }}
     permissions:
       # check out the source to build the site
       contents: read
@@ -494,7 +494,7 @@ jobs:
       !cancelled() && inputs.vanity-tags && needs.release-please.outputs.release_created &&
       (needs.goreleaser.result == 'success' || needs.goreleaser.result == 'skipped') &&
       contains(fromJSON('["push","workflow_dispatch","schedule"]'), github.event_name)
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.RUNNER_LABEL || 'ubuntu-latest' }}
     permissions:
       # move vanity tags
       contents: write

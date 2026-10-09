@@ -82,7 +82,7 @@ jobs:
       github.event.workflow_run.conclusion == 'failure' &&
       startsWith(github.event.workflow_run.head_branch, 'dependabot/') &&
       github.event.workflow_run.head_repository.full_name == github.repository
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.RUNNER_LABEL || 'ubuntu-latest' }}
     # Serialize rebuilds for one branch so two CI failures cannot race on the push.
     concurrency:
       group: dependabot-dist-${{ github.repository }}-${{ github.event.workflow_run.head_branch }}

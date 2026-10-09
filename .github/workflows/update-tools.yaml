@@ -75,7 +75,7 @@ permissions: {}
 
 jobs:
   update:
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.RUNNER_LABEL || 'ubuntu-latest' }}
     permissions:
       # reset the bot branch ref and create the bump commit via the API
       contents: write

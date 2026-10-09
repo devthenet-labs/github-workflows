@@ -96,7 +96,7 @@ jobs:
       github.event.workflow_run.event == 'pull_request_review') &&
       github.event.workflow_run.conclusion == 'success' && startsWith(github.event.workflow_run.head_branch,
       'dependabot/')
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.RUNNER_LABEL || 'ubuntu-latest' }}
     # Serialize ref moves within a repo so a /merge and a Dependabot merge cannot race
     # (same group as merge.yaml).
     concurrency:

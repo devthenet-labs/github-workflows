@@ -36,7 +36,7 @@ jobs:
     # pull_request_review payload inside a reusable workflow, so gate on the review
     # state here and keep the caller a bare `uses:`.
     if: github.event_name == 'pull_request_review' && github.event.review.state == 'approved'
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.RUNNER_LABEL || 'ubuntu-latest' }}
     steps:
       - name: Acknowledge the approval
         run: |
